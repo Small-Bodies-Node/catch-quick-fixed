@@ -25,5 +25,8 @@
     "build": "gatsby build --prefix-paths",
     "serve": "gatsby serve",
     "post-update": "echo \"codesandbox preview only, need an update\" && pnpm update --latest"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
   }
 }
