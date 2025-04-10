@@ -16,7 +16,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import LinkIcon from "@mui/icons-material/Link";
 
 const display = [
   "source_name",
@@ -26,6 +25,7 @@ const display = [
   "airmass",
   "maglimit",
   "preview_url",
+  "cutout_url",
 ];
 
 function CopyButton({ url }) {
@@ -91,6 +91,7 @@ const adornments = {
   airmass: ["Airmass", "", stringFormatter],
   maglimit: ["Limiting magnitude", "mag", stringFormatter],
   preview_url: ["Preview URL", "", urlFormatter],
+  cutout_url: ["FITS cutout URL", "", urlFormatter],
 };
 
 function Metadata({ item, meta }) {

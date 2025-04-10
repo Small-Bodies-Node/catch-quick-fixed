@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogActions from "@mui/material/DialogActions";
@@ -11,6 +12,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -23,8 +25,10 @@ import { parameterDefaults } from "../services/catch";
  * @enum {string}
  */
 const Sources = Object.freeze({
-  atlas_haleakela: "ATLAS, Haleakela",
-  atlas_mauna_loa: "ATLAS, Mauna Loa",
+  atlas_haleakela: "ATLAS, Haleakela, Hawaii",
+  atlas_mauna_loa: "ATLAS, Mauna Loa, Hawaii",
+  atlas_sutherland: "ATLAS, Sutherland, South Africa",
+  atlas_rio_hurtado: "ATLAS, Rio Hurtado, Chile",
   catalina_bigelow: "Catalina Sky Survey, Mt. Bigelow",
   catalina_lemmon: "Catalina Sky Survey, Mt. Lemmon",
   loneos: "LONEOS",
@@ -75,6 +79,9 @@ export default function SettingsDialog({
     if (key === "start_date" && invalidStartDate) setInvalidStartDate(false);
 
     if (key === "stop_date" && invalidStopDate) setInvalidStopDate(false);
+
+    if (key === "align")
+      value = event.target.checked;
 
     setParameters({ ...parameters, [key]: value });
   };
@@ -211,6 +218,12 @@ export default function SettingsDialog({
               },
             }}
           />
+          <FormControlLabel
+            control={<Checkbox checked={parameters.align}
+              onChange={(event) => handleChange("align", event)}
+              inputProps={{ "aria-label": "controlled" }} />
+            }
+            label="Align north up, east left" />
         </Stack>
       </DialogContent>
       <DialogActions>

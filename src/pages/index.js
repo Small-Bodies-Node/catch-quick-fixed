@@ -28,3 +28,7 @@ export default function Index() {
     </>
   );
 }
+
+export function Head() {
+  return <title>CATCH: Quick Fixed Coordinate Image Search</title>
+}

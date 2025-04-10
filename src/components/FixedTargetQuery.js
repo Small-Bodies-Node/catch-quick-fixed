@@ -67,18 +67,18 @@ function fixCutout(url, ra, dec, size) {
  * ra, dec in decimal degrees
  * size in armin
  */
-function setCutoutURLs(results, ra, dec, size) {
+function setCutoutURLs(results, ra, dec, size, align) {
   if (!results) return results;
 
   const updated = results?.data
     ? results.data.map((meta) => {
-        const cutoutURL = fixCutout(meta.cutout_url, ra, dec, size);
-        return {
-          ...meta,
-          preview_url: cutoutURL + "&format=jpeg",
-          cutout_url: cutoutURL + "&format=fits",
-        };
-      })
+      const cutoutURL = fixCutout(meta.cutout_url, ra, dec, size);
+      return {
+        ...meta,
+        preview_url: cutoutURL + `&align=${align}&format=jpeg`,
+        cutout_url: cutoutURL + "&format=fits",
+      };
+    })
     : null;
   return { ...results, data: updated };
 }
@@ -107,7 +107,8 @@ export default function FixedTargetQuery() {
     query.data,
     parseRA(queryParameters.ra),
     parseDec(queryParameters.dec),
-    parseFloat(queryParameters.size)
+    parseFloat(queryParameters.size),
+    queryParameters.align,
   );
 
   // messages

@@ -8,9 +8,10 @@ export const parameterDefaults = {
   radius: null,
   intersection_type: "ImageIntersectsArea",
   size: 5,
+  align: true,
 };
 
-const apiUrl = "https://catch-dev-api.astro.umd.edu";
+const apiUrl = "https://catch-api.astro.umd.edu";
 
 // delay in ms
 function sleep(delay) {
@@ -40,12 +41,12 @@ async function fetchObservations({
 
   const response = await fetchFromAPI(
     `fixed?ra=${ra}&dec=${dec}&sources=${source}` +
-      ((start_date || "") && `&start_date=${start_date}`) +
-      ((stop_date || "") && `&stop_date=${stop_date}`) +
-      ((radius || "") && `&radius=${radius}`) +
-      ((radius || "") &&
-        (intersection_type || "") &&
-        `&intersection_type=${intersection_type}`)
+    ((start_date || "") && `&start_date=${start_date}`) +
+    ((stop_date || "") && `&stop_date=${stop_date}`) +
+    ((radius || "") && `&radius=${radius}`) +
+    ((radius || "") &&
+      (intersection_type || "") &&
+      `&intersection_type=${intersection_type}`)
   );
 
   if (!response.ok) {
